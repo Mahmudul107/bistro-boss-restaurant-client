@@ -1,14 +1,17 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import Header from '../Shared/Header/Header';
 import Footer from '../Shared/Footer/Footer';
 
 const Main = () => {
+    const location = useLocation()
+    const noHeaderFooter = location.pathname.includes('login') || location.pathname.includes('signup')
     return (
         <div>
-            <Header/>
+            {noHeaderFooter || <Header/>}
             <Outlet/>
-            <Footer/>
+            { noHeaderFooter || <Footer/>}
+            <ScrollRestoration/>
         </div>
     );
 };
